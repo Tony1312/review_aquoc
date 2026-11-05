@@ -37,11 +37,11 @@ label.t{display:flex;gap:6px;align-items:center;color:var(--mu);font-size:.92rem
 </head>
 <body>
 <div class="w">
-<h1>Ôn tập Glucide – 70 câu trắc nghiệm</h1>
-<p class="sub">Dựa trên bài giảng Hóa học Glucide và Chuyển hóa Glucide – Th.S Nguyễn Thu Hà (PNT).</p>
+<h1 id="title">Ôn tập Glucide – 70 câu trắc nghiệm</h1>
+<p class="sub" id="subtitle">Dựa trên bài giảng Hóa học Glucide và Chuyển hóa Glucide – Th.S Nguyễn Thu Hà (PNT).</p>
 <div class="bar">
 <div class="ctl">
-<select id="part"><option value="all">Cả 70 câu</option><option value="1">Phần 1: Hóa học (1–35)</option><option value="2">Phần 2: Chuyển hóa (36–70)</option></select>
+<select id="part"><option value="all">Glucide: Cả 70 câu</option><option value="1">Glucide: Hóa học (1–35)</option><option value="2">Glucide: Chuyển hóa (36–70)</option><option value="protein">Bài 14: Sinh tổng hợp protein</option><option value="dna">Bài 3: Nhân đôi và sửa chữa DNA</option></select>
 <button id="shuf">Xáo trộn</button>
 <label class="t"><input type="checkbox" id="inst"> Hiện đáp án ngay khi chọn</label>
 <button class="p" id="sub">Nộp bài</button>
@@ -125,12 +125,65 @@ const D=[
 ["Thiếu hụt enzyme G6PDH khiến hồng cầu dễ vỡ khi gặp stress oxy hóa (ví dụ ăn đậu fava) vì:",["Hồng cầu không tạo được lactate","Hồng cầu thiếu ATP","Hồng cầu thiếu glucose","Không tạo đủ NADPH để tái tạo glutathion dạng khử (GSH) bảo vệ tế bào"],3,"Thiếu G6PDH → thiếu NADPH → không tái tạo được GSH → hồng cầu dễ vỡ."],
 ["Phát biểu nào sau đây về điều hòa đường huyết là đúng?",["Insulin do tế bào α tụy tiết ra, làm tăng đường huyết","Glucagon do tế bào α tuyến tụy tiết ra, kích thích gan phân giải glycogen thành glucose vào máu","Adrenalin làm giảm đường huyết","Glucocorticoid làm tăng sự thấm glucose vào mọi tế bào"],1,"Glucagon do tế bào α tụy tiết ra, kích thích gan phân giải glycogen. Insulin do tế bào β tiết ra, làm giảm đường huyết."]
 ];
+const P=[
+["Ribosome có ba vị trí gắn tRNA nào?",["A (aminoacyl), P (peptidyl), E (exit)","A (exit), P (aminoacyl), E (peptidyl)","A (peptidyl), P (exit), E (aminoacyl)","A, B và C"],0,"A là vị trí tiếp nhận aminoacyl-tRNA, P giữ tRNA mang chuỗi peptide, E là vị trí tRNA rời ribosome."],
+["Trong giai đoạn khởi đầu dịch mã, tRNA khởi đầu mang methionine gắn trước tiên ở vị trí nào?",["A","P","E","Cả A và E"],1,"Phức hợp tRNA khởi đầu-Met gắn vào vị trí P; tRNA tiếp theo mới đi vào vị trí A."],
+["Bộ ba khởi đầu thường gặp trên mRNA là:",["UAA","AUG","UAG","UGA"],1,"AUG là codon khởi đầu phổ biến; tài liệu cũng nêu CUG có thể khởi đầu trong một số trường hợp."],
+["Liên kết peptide trong ribosome được hình thành nhờ hoạt tính nào?",["DNA ligase","Peptidyl transferase","Ribonuclease H","DNA polymerase III"],1,"Peptidyl transferase xúc tác tạo liên kết peptide; trung tâm xúc tác chủ yếu nằm trên 23S rRNA ở prokaryote."],
+["Trong quá trình dịch mã, ribosome đọc mRNA theo chiều nào?",["3′ → 5′","5′ → 3′","Cả hai chiều luân phiên","Không theo chiều cố định"],1,"Ribosome di chuyển dọc mRNA theo chiều 5′ → 3′."],
+["Khi codon và anticodon bắt cặp chính xác ở vị trí A, điều gì xảy ra tiếp theo trong mô tả của bài giảng?",["GTP bị thủy phân và tRNA được giữ lại để tiếp tục kéo dài chuỗi","DNA polymerase cắt bỏ tRNA","Ribosome lập tức tách thành hai tiểu đơn vị","Chuỗi polypeptide bị thủy phân"],0,"Ở prokaryote, EF-Tu hỗ trợ chọn aa-tRNA; bắt cặp chính xác thúc đẩy thủy phân GTP và giảm hoạt tính EF-Tu."],
+["Yếu tố nào đưa aa-tRNA đến vị trí A ở prokaryote?",["EF-Tu-GTP","EF-G-GTP","IF-3","RF-1"],0,"EF-Tu gắn GTP và aa-tRNA, đưa phức hợp đến vị trí A."],
+["EF-Ts có vai trò gì trong quá trình kéo dài dịch mã ở prokaryote?",["Tái sinh EF-Tu bằng cách hỗ trợ trao đổi GDP lấy GTP","Nhận biết codon kết thúc","Tạo liên kết peptide","Gắn tiểu đơn vị 50S vào mRNA"],0,"EF-Ts tái sinh EF-Tu sau chu trình đưa aa-tRNA."],
+["Yếu tố nào thúc đẩy sự chuyển vị của ribosome ở prokaryote?",["EF-G-GTP","EF-Tu-GTP","IF-1","RF-2"],0,"EF-G sử dụng GTP để thúc đẩy ribosome chuyển vị qua một codon (ba nucleotide)."],
+["Sau khi chuyển vị, tRNA mang chuỗi peptide thường nằm ở:",["Vị trí A","Vị trí P","Vị trí E","Bên ngoài ribosome"],1,"Chuỗi peptide đang kéo dài được giữ trên tRNA ở vị trí P sau bước chuyển vị."],
+["Codon kết thúc có đặc điểm nào?",["Có tRNA mang amino acid tương ứng","Không có tRNA tương ứng; yếu tố giải phóng nhận biết codon","Luôn mã hóa methionine","Chỉ xuất hiện ở vị trí P lúc khởi đầu"],1,"UAA, UAG và UGA là codon kết thúc, không có tRNA tương ứng; yếu tố giải phóng gắn vào vị trí A."],
+["Ở prokaryote, RF-1 nhận biết những codon kết thúc nào?",["UAA và UAG","UAA và UGA","UAG và UGA","Cả ba codon"],0,"RF-1 nhận biết UAA hoặc UAG."],
+["Ở prokaryote, RF-2 nhận biết những codon kết thúc nào?",["UAA và UAG","UAA và UGA","UAG và UGA","Chỉ UGA"],1,"RF-2 nhận biết UAA hoặc UGA."],
+["Khi codon kết thúc được nhận biết, kết quả chính là:",["Giải phóng chuỗi polypeptide khỏi ribosome","Gắn thêm amino acid cuối cùng bằng tRNA","Nhân đôi mRNA","Tạo primer RNA"],0,"Yếu tố giải phóng thúc đẩy giải phóng chuỗi polypeptide và kết thúc dịch mã."],
+["Trong khởi đầu dịch mã ở prokaryote, tiểu đơn vị nào gắn mRNA và tRNA khởi đầu trước?",["30S","50S","60S","80S"],0,"Phức hợp khởi đầu hình thành trên tiểu đơn vị 30S trước khi 50S kết hợp."],
+["Ở phức hợp khởi đầu prokaryote, IF-2 gắn với nucleotide nào?",["ATP","GTP","CTP","UTP"],1,"IF-2-GTP tham gia đưa tRNA khởi đầu vào phức hợp trên 30S; GTP bị thủy phân khi ribosome hoàn chỉnh."],
+["Trong quá trình khởi đầu ở eukaryote, tiểu đơn vị nhỏ nào tham gia phức hợp tiền khởi đầu?",["30S","40S","50S","60S"],1,"Phức hợp tiền khởi đầu eukaryote hình thành trên tiểu đơn vị 40S; tiểu đơn vị 60S tham gia sau."],
+["Ở eukaryote, phức hợp khởi đầu thường đọc lướt mRNA từ đầu nào để tìm AUG?",["Đầu 3′, hướng về 5′","Đầu 5′, hướng về 3′","Giữa mRNA ra hai đầu","Không cần đọc lướt"],1,"Phức hợp gắn gần mũ 5′ rồi đọc lướt theo chiều 5′ → 3′ đến codon AUG."],
+["Yếu tố nào liên kết PABP ở đuôi poly(A) với các yếu tố gần đầu 5′, góp phần tạo cấu trúc vòng mRNA?",["eIF-4G","eIF-2","eIF-4A","eRF-1"],0,"eIF-4G tương tác với PABP và eIF-3, góp phần làm mRNA có cấu trúc vòng."],
+["Đuôi poly(A) của mRNA có vai trò nào được nêu trong bài giảng?",["Làm mRNA bền hơn và tăng hiệu suất dịch mã","Tạo codon khởi đầu AUG","Thay thế vị trí gắn của tRNA","Thủy phân GTP"],0,"Tài liệu nêu đuôi poly(A) giúp mRNA bền và tăng hiệu suất dịch mã."],
+["Các yếu tố kéo dài ở eukaryote tương ứng chức năng với bộ ba nào ở prokaryote?",["eEF1A = EF-Tu; eEF1B = EF-Ts; eEF2 = EF-G","eEF1A = EF-G; eEF1B = RF-1; eEF2 = IF-2","eEF1A = IF-3; eEF1B = EF-G; eEF2 = EF-Tu","Cả ba đều tương ứng với RF-1"],0,"Tài liệu đối chiếu eEF1A với EF-Tu, eEF1B với EF-Ts và eEF2 với EF-G."],
+["Ở eukaryote, yếu tố giải phóng eRF-1 có đặc điểm nào?",["Chỉ nhận biết UAA","Nhận biết cả ba codon kết thúc","Mang amino acid đến vị trí A","Tạo liên kết peptide"],1,"eRF-1 nhận biết cả UAA, UAG và UGA; hoạt động được hỗ trợ bởi eRF-3."]
+];
+const N=[
+["DNA nhân đôi chủ yếu ở pha nào của chu kỳ tế bào?",["G₁","S","G₂","M"],1,"Pha S là giai đoạn DNA nhân đôi và histone được tổng hợp."],
+["Cơ chế nhân đôi DNA được gọi là bán bảo tồn vì:",["Mỗi DNA con gồm một mạch gốc và một mạch mới tổng hợp","Hai DNA con chỉ gồm các mạch mới","Một DNA con giữ nguyên cả hai mạch gốc","DNA con được tạo từ RNA và protein"],0,"Mỗi phân tử DNA con giữ lại một mạch của DNA mẹ và có thêm một mạch mới."],
+["Sự nhân đôi DNA bắt đầu bằng bước nào?",["DNA ligase nối các đoạn Okazaki","Nhận diện trình tự khởi đầu Ori","DNA polymerase tổng hợp mạch mới","Primase tạo primer"],1,"Quá trình khởi đầu tại Ori (origin of replication), sau đó DNA được tháo xoắn và các enzyme khác tham gia."],
+["DNA polymerase kéo dài mạch DNA mới theo chiều nào?",["3′ → 5′","5′ → 3′","Cả hai chiều trên cùng một mạch","Không phụ thuộc chiều"],1,"DNA polymerase chỉ gắn nucleotide theo chiều 5′ → 3′ vào đầu 3′-OH đang phát triển."],
+["DNA polymerase cần điều kiện nào để bắt đầu kéo dài mạch?",["Primer có đầu 3′-OH tự do","Codon khởi đầu AUG","Đầu 5′-phosphate trống, không cần primer","Một amino acid"],0,"DNA polymerase không tự khởi đầu được; cần primer cung cấp đầu 3′-OH tự do."],
+["Enzyme nào tháo xoắn DNA tại ngã ba nhân đôi?",["Helicase","Ligase","Primase","DNA polymerase I"],0,"Helicase tháo xoắn phân tử DNA để lộ các mạch khuôn."],
+["Protein SSB có chức năng gì trong nhân đôi DNA?",["Ổn định các mạch DNA đơn sau khi tách","Nối các đoạn Okazaki","Tổng hợp đoạn mồi RNA","Tháo xoắn DNA"],0,"SSB gắn vào DNA sợi đơn, giữ hai mạch tách rời và ổn định mạch khuôn."],
+["Primase tổng hợp thành phần nào để DNA polymerase bắt đầu tổng hợp?",["Primer RNA","Đoạn DNA telomere","Peptide khởi đầu","Codon kết thúc"],0,"Primase (DnaG ở vi khuẩn) tổng hợp đoạn mồi RNA có đầu 3′-OH."],
+["Trong nhân đôi DNA ở vi khuẩn, enzyme nào là polymerase chính kéo dài DNA?",["DNA polymerase I","DNA polymerase II","DNA polymerase III","RNA polymerase"],2,"DNA polymerase III là enzyme chính thực hiện nhân đôi ở E. coli."],
+["DNA polymerase I ở E. coli góp phần nào trong nhân đôi?",["Loại bỏ primer RNA và thay bằng DNA","Tháo xoắn DNA tại Ori","Tổng hợp toàn bộ mạch dẫn đầu","Nối amino acid"],0,"DNA polymerase I có hoạt tính exonuclease 5′ → 3′ giúp loại primer, đồng thời lấp khoảng trống bằng DNA."],
+["Hoạt tính proofreading exonuclease 3′ → 5′ của một số DNA polymerase có tác dụng gì?",["Loại nucleotide mới gắn sai để sửa lỗi","Tổng hợp primer RNA","Nối các mạch DNA","Tháo xoắn chromosome"],0,"Đọc sửa theo chiều 3′ → 5′ loại bỏ nucleotide gắn sai ở đầu mạch mới tổng hợp."],
+["Vì sao mạch chậm được tổng hợp thành các đoạn Okazaki?",["Hai mạch khuôn ngược chiều nhau nhưng DNA polymerase chỉ tổng hợp 5′ → 3′","Mạch chậm không có primer","Ligase ngăn cản tổng hợp liên tục","Mạch chậm chỉ được tổng hợp theo chiều 3′ → 5′"],0,"Do tính ngược chiều của hai mạch khuôn và giới hạn tổng hợp 5′ → 3′, mạch chậm được tạo thành từng đoạn."],
+["Enzyme nào nối các đoạn Okazaki bằng liên kết phosphodiester?",["DNA ligase","Helicase","Primase","SSB"],0,"DNA ligase nối các đoạn DNA liền kề sau khi primer được loại bỏ và khoảng trống được lấp."],
+["DNA gyrase/topoisomerase giúp gì tại vùng nhân đôi?",["Giảm sức căng và trạng thái siêu xoắn phía trước chạc nhân đôi","Tạo liên kết peptide","Gắn amino acid vào tRNA","Tổng hợp đoạn mồi"],0,"Topoisomerase làm giảm sức căng do helicase tháo xoắn gây ra; DNA gyrase là một topoisomerase ở vi khuẩn."],
+["Protein DnaA trong sơ đồ nhân đôi ở vi khuẩn tham gia bước nào?",["Nhận biết và gắn vào trình tự khởi đầu DNA","Nối đoạn Okazaki","Tổng hợp primer RNA","Loại bỏ primer RNA"],0,"DnaA gắn vào trình tự DNA tại điểm khởi đầu Ori."],
+["Trong tế bào nhân thực, các quả bóng nhân đôi trên DNA thường phát triển theo hướng nào?",["Một hướng duy nhất","Hai hướng từ điểm khởi đầu","Không có hướng xác định","Chỉ theo chiều 3′ → 5′"],1,"Từ điểm khởi đầu, hai chạc nhân đôi thường tiến ra hai hướng; nhiều điểm Ori có thể hoạt động trên chromosome."],
+["Trình tự lặp phổ biến ở telomere người là:",["TTAGGG","AUG","UAA","CCCCAA"],0,"Telomere người chứa các trình tự lặp TTAGGG ở đầu mút nhiễm sắc thể."],
+["Telomerase có vai trò chính nào?",["Giúp kéo dài telomere bằng cách bổ sung các trình tự lặp ở đầu mút chromosome","Sửa mọi loại sai cặp nucleotide","Thay thế DNA ligase","Khởi đầu dịch mã"],0,"Telomerase duy trì/kéo dài telomere ở những tế bào có hoạt tính enzyme này."],
+["Sửa chữa sai cặp hậu nhân đôi ở vi khuẩn có thể phân biệt mạch mới với mạch gốc dựa vào:",["Trạng thái methyl hóa của mạch gốc","Sự hiện diện của codon AUG","Độ dài của telomere","Protein histone"],0,"Trong mô hình nêu ở bài giảng, mạch gốc được methyl hóa trước; mạch mới chưa methyl hóa giúp hệ sửa chữa nhận diện vị trí sai."],
+["Trong sửa chữa cắt xén base, enzyme nào nhận biết và loại bỏ uracil phát sinh trong DNA?",["Uracil DNA glycosylase","DNA ligase","Helicase","DNA polymerase III"],0,"Uracil DNA glycosylase nhận diện uracil trong DNA và khởi đầu sửa chữa cắt xén base."],
+["Cytosine bị khử amin có thể tạo thành base nào?",["Uracil","Adenine","Guanine","Thymine"],0,"Khử amin cytosine tạo uracil; nếu không được sửa, có thể gây đột biến khi DNA nhân đôi."],
+["Sửa chữa cắt xén nucleotide thường loại bỏ loại tổn thương nào?",["Dimer thymine do tia UV","Sai amino acid trong protein","Codon AUG","Liên kết peptide"],0,"Sửa chữa cắt xén nucleotide có thể loại bỏ đoạn DNA chứa tổn thương cồng kềnh như dimer thymine."],
+["Hội chứng khô sắc tố da (xeroderma pigmentosum) liên quan đến khiếm khuyết nào?",["Sửa chữa cắt xén nucleotide, làm tăng nhạy cảm với tia UV và nguy cơ ung thư da","Tổng hợp glycogen","Sửa chữa liên kết peptide","Tạo primer RNA"],0,"Tài liệu liên hệ bệnh với đột biến các gene của hệ sửa chữa cắt xén nucleotide và nguy cơ ung thư da tăng khi tiếp xúc ánh sáng."],
+["Nếu các tổn thương DNA không được sửa chữa chính xác, hậu quả nào có thể xảy ra?",["Tích lũy đột biến và tăng nguy cơ ung thư","DNA không còn cần nhân đôi","Tất cả protein tự phân hủy","Telomere lập tức dài ra"],0,"Tổn thương không được sửa chữa có thể trở thành đột biến, gây bất ổn nhiễm sắc thể và góp phần làm tăng nguy cơ ung thư."]
+];
 const L="ABCD";
 let items=[],ans={},done=false;
 const $=id=>document.getElementById(id);
 function build(shuffle){
   const p=$("part").value;
-  items=D.map((d,i)=>({d,n:i+1})).filter(x=>p==="all"||(p==="1"?x.n<=35:x.n>35));
+  const source=p==="protein"?P:p==="dna"?N:D;
+  items=source.map((d,i)=>({d,n:i+1})).filter(x=>source!==D||p==="all"||(p==="1"?x.n<=35:x.n>35));
+  const titles={all:["Ôn tập Glucide – 70 câu trắc nghiệm","Dựa trên bài giảng Hóa học Glucide và Chuyển hóa Glucide – Th.S Nguyễn Thu Hà (PNT)."],"1":["Ôn tập Glucide – Phần Hóa học","Dựa trên bài giảng Hóa học Glucide – Th.S Nguyễn Thu Hà (PNT)."],"2":["Ôn tập Glucide – Phần Chuyển hóa","Dựa trên bài giảng Chuyển hóa Glucide – Th.S Nguyễn Thu Hà (PNT)."],protein:["Ôn tập Bài 14 – Sinh tổng hợp protein","Câu hỏi về các giai đoạn dịch mã ở prokaryote và eukaryote."],dna:["Ôn tập Bài 3 – Sự nhân đôi và sửa chữa DNA","Câu hỏi về nhân đôi DNA, telomere và các cơ chế sửa chữa DNA."]};
+  $("title").textContent=titles[p][0];$("subtitle").textContent=titles[p][1];document.title=titles[p][0];
   if(shuffle)for(let i=items.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[items[i],items[j]]=[items[j],items[i]]}
   ans={};done=false;$("res").className="res";render();
 }
