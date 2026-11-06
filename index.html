@@ -41,7 +41,7 @@ label.t{display:flex;gap:6px;align-items:center;color:var(--mu);font-size:.92rem
 <p class="sub" id="subtitle">Dựa trên bài giảng Hóa học Glucide và Chuyển hóa Glucide – Th.S Nguyễn Thu Hà (PNT).</p>
 <div class="bar">
 <div class="ctl">
-<select id="part"><option value="all">Glucide: Cả 70 câu</option><option value="1">Glucide: Hóa học (1–35)</option><option value="2">Glucide: Chuyển hóa (36–70)</option><option value="protein">Bài 14: Sinh tổng hợp protein</option><option value="dna">Bài 3: Nhân đôi và sửa chữa DNA</option></select>
+<select id="part"><option value="all">Glucide: Cả 70 câu</option><option value="1">Glucide: Hóa học (1–35)</option><option value="2">Glucide: Chuyển hóa (36–70)</option><option value="protein">Bài 14: Sinh tổng hợp protein</option><option value="dna">Bài 3: Nhân đôi và sửa chữa DNA</option><option value="lip1">Lipid: Hóa học Lipid</option><option value="lip2">Lipid: Chuyển hóa Lipid</option><option value="shpt">Kỹ thuật SHPT cơ bản</option></select>
 <button id="shuf">Xáo trộn</button>
 <label class="t"><input type="checkbox" id="inst"> Hiện đáp án ngay khi chọn</label>
 <button class="p" id="sub">Nộp bài</button>
@@ -175,14 +175,58 @@ const N=[
 ["Hội chứng khô sắc tố da (xeroderma pigmentosum) liên quan đến khiếm khuyết nào?",["Sửa chữa cắt xén nucleotide, làm tăng nhạy cảm với tia UV và nguy cơ ung thư da","Tổng hợp glycogen","Sửa chữa liên kết peptide","Tạo primer RNA"],0,"Tài liệu liên hệ bệnh với đột biến các gene của hệ sửa chữa cắt xén nucleotide và nguy cơ ung thư da tăng khi tiếp xúc ánh sáng."],
 ["Nếu các tổn thương DNA không được sửa chữa chính xác, hậu quả nào có thể xảy ra?",["Tích lũy đột biến và tăng nguy cơ ung thư","DNA không còn cần nhân đôi","Tất cả protein tự phân hủy","Telomere lập tức dài ra"],0,"Tổn thương không được sửa chữa có thể trở thành đột biến, gây bất ổn nhiễm sắc thể và góp phần làm tăng nguy cơ ung thư."]
 ];
+const L1=[
+["Nhóm nào sau đây thuộc lipid thuần (chỉ chứa C, H, O)?",["Glycerid, cerid, sterid","Phosphatid, sphingolipid","Glycolipid, sulfatid","Phospholipid, ganglioside"],0,"Lipid thuần chỉ có C, H, O: glycerid, cerid, sterid. Lipid tạp có thêm P, N, S."],
+["Chất nào sau đây thuộc nhóm lipid không thủy phân được (lipoid)?",["Triacylglycerol","Cholesterol","Lecithin","Sáp ong"],1,"Lipid không thủy phân được không có liên kết ester: acid béo tự do, sterol (alcol vòng), vitamin tan trong lipid."],
+["Đặc điểm nào đúng với acid béo?",["Acid hữu cơ đa carboxyl, số C thường lẻ","Acid hữu cơ monocarboxyl 4-36 carbon, số C thường chẵn","Chỉ có dạng mạch vòng","Luôn chứa nối đôi"],1,"Acid béo là acid monocarboxyl (R-COOH) có 4-36 C, thường số C chẵn; có thể bão hòa hoặc không bão hòa."],
+["Ký hiệu 18:2;9,12 cho biết acid béo có:",["18 C, 2 nối đôi ở C9-10 và C12-13","18 C, 9 nối đôi","12 C, 18 nối đôi","2 C, 18 nối đôi"],0,"X:Y(a,b): X là số C, Y là số nối đôi, a,b là vị trí nối đôi tính từ C1."],
+["Ký hiệu nào là của acid arachidonic?",["C18:2;9,12","C18:3;9,12,15","C20:0","C20:4;5,8,11,14"],3,"Acid arachidonic là 20:4 (Δ5,8,11,14), tiền chất của nhóm eicosanoid."],
+["Acid béo không no trong thiên nhiên thường ở dạng nào và có ý nghĩa gì?",["Dạng trans, làm màng cứng","Dạng cis, sự gập góc quan trọng cho cấu trúc sinh học của màng tế bào","Dạng trans, tăng nhiệt độ nóng chảy","Luôn mạch thẳng, không gập góc"],1,"Dạng cis gây gập góc (khoảng 120°), có ý nghĩa quan trọng đối với cấu trúc màng tế bào."],
+["Hàm lượng acid béo không bão hòa trong glycerid càng nhiều thì:",["Nhiệt độ nóng chảy càng cao","Nhiệt độ nóng chảy càng thấp","Không ảnh hưởng nhiệt độ nóng chảy","Chuyển thành sáp"],1,"Nhiều acid béo không no thì nhiệt độ nóng chảy thấp (dầu lỏng), nhiều acid béo no thì mỡ rắn."],
+["Cerid (sáp) là ester của:",["Glycerol với 3 acid béo","Acid béo chuỗi dài với alcol phân tử lượng cao (30-40C)","Cholesterol với acid béo","Sphingosine với acid béo"],1,"Sáp không thấm nước và có vai trò bảo vệ (sáp ong, sáp lá, vỏ vi khuẩn lao)."],
+["Phosphatidyl choline và phosphatidyl ethanolamin còn gọi lần lượt là:",["Cephalin, lecithin","Lecithin, cephalin","Cerebrosid, ganglioside","Sphingomyelin, lecithin"],1,"Phosphatidyl choline = lecithin; phosphatidyl ethanolamin = cephalin; cùng tham gia cấu trúc màng tế bào."],
+["Alcol của sphingolipid là:",["Glycerol","Cholesterol","Sphingosine","Choline"],2,"Glycerophospholipid có alcol là glycerol, sphingolipid có alcol là sphingosine."],
+["Hợp chất nào tham gia quá trình đông máu và hợp chất nào giãn mạch, ức chế lắng đọng tiểu cầu?",["Prostacyclin; thromboxane","Thromboxane; prostacyclin","Prostaglandin; leucotriene","Lipoxin; thromboxane"],1,"Thromboxane (TXA, TXB) tham gia đông máu; prostacyclin (PGI) giãn mạch, ức chế lắng đọng tiểu cầu."],
+["Cortisol và progesterone là dẫn xuất của cholesterol có vai trò lần lượt là:",["Điều hòa cân bằng muối; phát triển giới tính","Chuyển hóa đường, protein, lipid; kiểm soát chu kỳ kinh nguyệt và thai","Thu nhận cholesterol thừa; tiêu hóa lipid","Hạ huyết áp; co cơ trơn"],1,"Cortisol (glucocorticoid) chuyển hóa đường, protein, lipid; progesterone (progestin) kiểm soát chu kỳ kinh nguyệt và thai."]
+];
+const L2=[
+["Lipase tụy thủy phân triacylglycerol cho sản phẩm nào?",["Glycerol và 3 acid béo","Acid béo ở C1, C3 tự do và 2-monoacylglycerol","Cholesterol tự do","Phosphatidic acid"],1,"Lipase tụy cắt acid béo ở C1 và C3 của glycerol, tạo acid béo tự do và 2-monoacylglycerol."],
+["Vai trò của muối mật trong tiêu hóa lipid là:",["Thủy phân liên kết ester","Nhũ tương hóa lipid, tạo micelle, tăng diện tích tiếp xúc với lipase","Hoạt hóa pepsin","Vận chuyển lipid trong máu"],1,"Muối mật có phần phân cực và không phân cực, nhũ tương hóa lipid và hình thành micelle."],
+["Lipoprotein có đường kính lớn nhất, nhiều TG nhất và chứa apoB48 là:",["HDL","LDL","VLDL","Chylomicron"],3,"Chylomicron (CM) lớn nhất, kém đặc nhất, chứa nhiều TG; apoCII hoạt hóa lipoprotein lipase."],
+["Apoprotein nào hoạt hóa lipoprotein lipase ở thành mao mạch?",["ApoB100","ApoCII","ApoAI","ApoB48"],1,"ApoCII hoạt hóa lipoprotein lipase, thủy phân TG thành acid béo tự do cung cấp cho mô."],
+["LDL được gọi là cholesterol xấu vì:",["Chứa nhiều TG nhất","Vận chuyển cholesterol đến các mô ngoài gan (nhận diện qua apoB100)","Thu cholesterol thừa về gan","Chỉ có ở ruột non"],1,"LDL giàu cholesterol và cholesteryl ester, tăng LDL giảm HDL liên quan xơ vữa động mạch."],
+["HDL có nhiệm vụ chính là:",["Cung cấp acid béo cho mô ngoại vi","Thu nhận cholesterol thừa đưa về gan","Vận chuyển TG ngoại sinh","Tổng hợp VLDL"],1,"HDL giàu protein, nhờ LCAT ester hóa cholesterol và đưa về gan; là lipoprotein có lợi."],
+["Acyl-CoA được vận chuyển từ bào tương vào ty thể nhờ:",["Albumin","Carnitine và carnitine acyl transferase (CPT)","Citrate lyase","Acid béo synthase"],1,"CPT-I tạo acyl-carnitine ở màng ngoài, CPT-II chuyển lại acyl-CoA trong ty thể."],
+["β-oxy hóa acid palmitic (16C) cho bao nhiêu vòng, bao nhiêu acetyl-CoA và tổng ATP thu được (theo bài giảng)?",["8 vòng; 7 acetyl-CoA; 129 ATP","7 vòng; 8 acetyl-CoA; 129 ATP","7 vòng; 7 acetyl-CoA; 96 ATP","16 vòng; 8 acetyl-CoA; 129 ATP"],1,"Acid béo n C: (n/2 - 1) vòng, n/2 acetyl-CoA. 14 + 21 + 96 - 2 = 129 ATP."],
+["Chất nào ức chế CPT-I, làm giảm β-oxy hóa?",["Glucagon","Malonyl-CoA","AMP","Adrenalin"],1,"Malonyl-CoA (từ tổng hợp acid béo nhờ ACC) ức chế CPT-I."],
+["Thể ceton gồm:",["Glycerid, cerid, steroid","Lactat, acetyl-CoA","Acetone, acetoacetic acid, β-hydroxybutyric acid","Pyruvat, acid amin"],2,"Thể ceton tổng hợp ở ty thể gan (HMG-CoA synthase, lyase); gan không sử dụng được do thiếu acetoacetate-CoA transferase."],
+["Coenzyme nào tham gia tổng hợp acid béo?",["NAD+/NADH","FAD/FADH2","NADP+/NADPH","FMN/FMNH2"],2,"Tổng hợp acid béo cần acetyl-CoA, malonyl-CoA, acid béo synthase, ATP và NADPH; sản phẩm đầu là palmitic 16C."],
+["Enzyme then chốt điều hòa tổng hợp cholesterol là:",["HMG-CoA reductase","Lipoprotein lipase","LCAT","Thiokinase"],0,"HMG-CoA reductase: insulin và hormon giáp làm tăng hoạt tính; glucagon, glucocorticoid làm giảm; bị ức chế bởi cholesterol nội bào."],
+["Các hormon làm tăng thoái hóa lipid là:",["Insulin, prostaglandin, adrenalin","Prostaglandin, adrenalin, glucagon","Adrenalin, glucagon, ACTH","Insulin, adrenalin, ACTH"],2,"Adrenalin, glucagon, ACTH kích thích thủy phân TG; insulin thì ngược lại, thúc đẩy tổng hợp và dự trữ TG."]
+];
+const S=[
+["Đặc điểm nào đúng với bộ gen ty thể người?",["Mạch thẳng, 3,1 Gb","Mạch vòng, khoảng 16,6 kb, di truyền từ mẹ","Có nhiều intron","Di truyền theo luật Mendel"],1,"Bộ gen ty thể mạch vòng, 16,6 kb, ít intron, chỉ di truyền từ mẹ."],
+["Đặc điểm cấu trúc gen ở sinh vật nhân sơ là:",["Không có vùng điều hòa","Không có vùng mã hóa","Không phân mảnh","Có nhiều intron"],2,"Gen nhân sơ không phân mảnh (không có intron)."],
+["Đoạn mồi có 8 cặp A/T và 12 cặp C/G. Nhiệt độ bắt cặp Th = Tm - 5°C là:",["59°C","64°C","69°C","55°C"],0,"Tm = 2(8) + 4(12) = 64°C; Th = 64 - 5 = 59°C."],
+["Kỹ thuật FISH có đặc điểm:",["Cần tách chiết DNA trước khi lai","Lai trực tiếp trên tế bào hoặc mô, dùng probe huỳnh quang, đọc dưới kính hiển vi huỳnh quang","Chỉ định lượng RNA","Dùng ddNTP"],1,"FISH xác định biến đổi di truyền ở mức gen và nhiễm sắc thể mà không cần tách chiết acid nucleic."],
+["Trong PCR, giai đoạn kéo dài chuỗi thường ở:",["92-95°C","30-65°C","70-72°C","4°C"],2,"Biến tính 92-95°C; bắt cặp mồi 30-65°C (theo Th); kéo dài 70-72°C nhờ Taq polymerase."],
+["Từ 1 phân tử DNA đích, sau 10 chu kỳ PCR lý thuyết thu được:",["10 bản","100 bản","1.024 bản","2.048 bản"],2,"Sau n chu kỳ có 2^n sản phẩm: 2^10 = 1.024."],
+["Vai trò của chứng dương trong PCR là:",["Kiểm tra khâu tách chiết","Chứng minh PCR mix hoạt động và độ đặc hiệu của cặp mồi","Kiểm tra ngoại nhiễm hóa chất","Kiểm tra chất ức chế sau tách chiết"],1,"Chứng dương không kiểm tra được khâu tách chiết; việc này do chứng nội tại đảm nhiệm."],
+["Chứng nước (nước cất DNAse-free + PCR mix) dùng để:",["Kiểm tra tách chiết","Chứng minh PCR mix và thiết bị không bị ngoại nhiễm hoặc nhiễm chéo","Làm thang đo kích thước","Định lượng DNA"],1,"Chứng nước khác chứng âm; nó phát hiện ngoại nhiễm sản phẩm khuếch đại."],
+["Trong real-time PCR, Ct (Cycle of Threshold) là:",["Số chu kỳ tối đa của phản ứng","Số chu kỳ mà tại đó tín hiệu huỳnh quang vượt tín hiệu nền","Nhiệt độ bắt cặp","Số copy ban đầu"],1,"Ct càng nhỏ thì lượng DNA đích ban đầu càng nhiều."],
+["Hạn chế của SYBR Green I trong real-time PCR là:",["Không phát huỳnh quang khi gắn DNA","Không phân biệt được sản phẩm đặc hiệu và không đặc hiệu","Chỉ gắn DNA sợi đơn","Cần quencher"],1,"SYBR Green I chèn vào mọi DNA sợi đôi; probe (TaqMan...) mới đặc hiệu nhờ cặp fluorophore-quencher."],
+["Trong phương pháp Sanger, ddNTP làm dừng kéo dài chuỗi vì:",["Thiếu nhóm 3'-OH","Thiếu nhóm 5'-phosphate","Không bắt cặp bổ sung","Làm biến tính polymerase"],0,"Không có 3'-OH thì không gắn thêm được nucleotide kế tiếp; các đoạn dài khác nhau được tách bằng điện di."],
+["So với Sanger (tối đa khoảng 800 bp), NGS có ưu điểm:",["Giải trình tự 1 đoạn mỗi phản ứng","Giải trình tự song song hàng triệu đoạn, chi phí thấp hơn nhiều","Dùng ddNTP","Chỉ đọc đoạn ngắn hơn 100 bp"],1,"NGS cho lượng dữ liệu rất lớn, chi phí khoảng 0,5 USD/Mb so với khoảng 2400 USD/Mb của Sanger."],
+["Hệ thống Ion Torrent phát hiện sự gắn nucleotide dựa trên:",["Huỳnh quang laser","Thay đổi pH do giải phóng ion H+","Phóng xạ 32P","Điện di mao quản"],1,"Ion Torrent dùng chip bán dẫn đo trực tiếp ion H+ chuyển thành tín hiệu điện."]
+];
 const L="ABCD";
 let items=[],ans={},done=false;
 const $=id=>document.getElementById(id);
 function build(shuffle){
   const p=$("part").value;
-  const source=p==="protein"?P:p==="dna"?N:D;
+  const source={protein:P,dna:N,lip1:L1,lip2:L2,shpt:S}[p]||D;
   items=source.map((d,i)=>({d,n:i+1})).filter(x=>source!==D||p==="all"||(p==="1"?x.n<=35:x.n>35));
-  const titles={all:["Ôn tập Glucide – 70 câu trắc nghiệm","Dựa trên bài giảng Hóa học Glucide và Chuyển hóa Glucide – Th.S Nguyễn Thu Hà (PNT)."],"1":["Ôn tập Glucide – Phần Hóa học","Dựa trên bài giảng Hóa học Glucide – Th.S Nguyễn Thu Hà (PNT)."],"2":["Ôn tập Glucide – Phần Chuyển hóa","Dựa trên bài giảng Chuyển hóa Glucide – Th.S Nguyễn Thu Hà (PNT)."],protein:["Ôn tập Bài 14 – Sinh tổng hợp protein","Câu hỏi về các giai đoạn dịch mã ở prokaryote và eukaryote."],dna:["Ôn tập Bài 3 – Sự nhân đôi và sửa chữa DNA","Câu hỏi về nhân đôi DNA, telomere và các cơ chế sửa chữa DNA."]};
+  const titles={lip1:["Ôn tập Hóa học Lipid","Dựa trên bài giảng Hóa học Lipid – ThS. Huỳnh Thị Thanh Trúc (PNT)."],lip2:["Ôn tập Chuyển hóa Lipid","Dựa trên bài giảng Chuyển hóa Lipid – ThS. Huỳnh Thị Thanh Trúc (PNT)."],shpt:["Ôn tập Kỹ thuật SHPT cơ bản","Dựa trên bài giảng Các kỹ thuật SHPT cơ bản – ThS. BS. Nguyễn Hưng Thịnh (PNT)."],all:["Ôn tập Glucide – 70 câu trắc nghiệm","Dựa trên bài giảng Hóa học Glucide và Chuyển hóa Glucide – Th.S Nguyễn Thu Hà (PNT)."],"1":["Ôn tập Glucide – Phần Hóa học","Dựa trên bài giảng Hóa học Glucide – Th.S Nguyễn Thu Hà (PNT)."],"2":["Ôn tập Glucide – Phần Chuyển hóa","Dựa trên bài giảng Chuyển hóa Glucide – Th.S Nguyễn Thu Hà (PNT)."],protein:["Ôn tập Bài 14 – Sinh tổng hợp protein","Câu hỏi về các giai đoạn dịch mã ở prokaryote và eukaryote."],dna:["Ôn tập Bài 3 – Sự nhân đôi và sửa chữa DNA","Câu hỏi về nhân đôi DNA, telomere và các cơ chế sửa chữa DNA."]};
   $("title").textContent=titles[p][0];$("subtitle").textContent=titles[p][1];document.title=titles[p][0];
   if(shuffle)for(let i=items.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[items[i],items[j]]=[items[j],items[i]]}
   ans={};done=false;$("res").className="res";render();
