@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ôn tập Glucide – 70 câu trắc nghiệm</title>
+<title>Ôn tập trắc nghiệm</title>
 <style>
 :root{--bg:#f6f7fb;--card:#fff;--tx:#1d2433;--mu:#6b7385;--bd:#d9dde8;--ac:#2f6fed;--ok:#1a8a4a;--okb:#e3f6ea;--no:#c62f3b;--nob:#fde8ea}
 @media(prefers-color-scheme:dark){:root{--bg:#14171f;--card:#1e222d;--tx:#e8ebf2;--mu:#9aa3b5;--bd:#333a4a;--ac:#6d9bff;--ok:#5fd18a;--okb:#16301f;--no:#ff7b86;--nob:#3a1a1e}}
@@ -37,7 +37,7 @@ label.t{display:flex;gap:6px;align-items:center;color:var(--mu);font-size:.92rem
 </head>
 <body>
 <div class="w">
-<h1 id="title">Ôn tập Glucide – 70 câu trắc nghiệm</h1>
+<h1 id="title">Ôn tập trắc nghiệm</h1>
 <div class="bar">
 <div class="ctl">
 <select id="part"><option value="all">Glucide: Cả 70 câu</option><option value="1">Glucide: Hóa học (1–35)</option><option value="2">Glucide: Chuyển hóa (36–70)</option><option value="shpt">Kỹ thuật SHPT cơ bản</option><option value="seq">Giải trình tự DNA (40 câu)</option><option value="enzyme">Enzyme (50 câu)</option><option value="hormone">Hormone (50 câu)</option><option value="vitamin">Vitamin (50 câu)</option><option value="lipid">Lipid: Hóa học &amp; Chuyển hóa (100 câu)</option><option value="translation">Dịch mã – Sinh tổng hợp protein (70 câu)</option><option value="replication">Nhân đôi &amp; sửa chữa DNA (50 câu)</option><option value="renal">Hóa sinh mô thận (70 câu)</option><option value="hepato">Hóa sinh gan, mật, tụy (70 câu)</option><option value="cardiac">Hóa sinh cơ tim (70 câu)</option><option value="applications">Ứng dụng sinh học phân tử (90 câu)</option></select>
@@ -967,7 +967,7 @@ function build(shuffle){
   const source={shpt:S,seq:SEQ,enzyme:ENZ,hormone:HOR,vitamin:VIT,lipid:LIP,translation:TRN,replication:REP,renal:REN,hepato:HEP,cardiac:CAR,applications:APP}[p]||D;
   items=source.map((d,i)=>({d,n:i+1})).filter(x=>source!==D||p==="all"||(p==="1"?x.n<=35:x.n>35));
   const titles={shpt:["Ôn tập Kỹ thuật SHPT cơ bản","Dựa trên bài giảng Các kỹ thuật SHPT cơ bản – ThS. BS. Nguyễn Hưng Thịnh (PNT)."],seq:["Ôn tập Kỹ thuật giải trình tự DNA – 40 câu","Bộ câu hỏi về giải trình tự DNA/Gen, Sanger, điện di mao quản và NGS."],enzyme:["Ôn tập Enzyme – 50 câu","Bộ câu hỏi trắc nghiệm chuyên đề Enzyme."],hormone:["Ôn tập Hormone – 50 câu","Bộ câu hỏi trắc nghiệm chuyên đề Hormone."],vitamin:["Ôn tập Vitamin – 50 câu","Bộ câu hỏi trắc nghiệm chuyên đề Vitamin."],lipid:["Ôn tập Hóa học và Chuyển hóa Lipid – 100 câu","Bộ đề ôn tập gồm 50 câu Hóa học Lipid và 50 câu Chuyển hóa Lipid."],translation:["Ôn tập Dịch mã – Sinh tổng hợp protein (Bài 14)","Bộ 70 câu hỏi trắc nghiệm về quá trình dịch mã."],replication:["Ôn tập Nhân đôi và sửa chữa DNA – 50 câu","Bộ câu hỏi về nhân đôi DNA và các cơ chế sửa chữa DNA."],renal:["Ôn tập Hóa sinh mô thận – 70 câu","Bộ câu hỏi trắc nghiệm ôn tập hóa sinh lâm sàng về thận."],hepato:["Ôn tập Hóa sinh gan, mật, tụy – 70 câu","Bộ câu hỏi trắc nghiệm ôn tập hóa sinh lâm sàng về gan, mật và tụy."],cardiac:["Ôn tập Hóa sinh cơ tim – 70 câu","Bộ câu hỏi trắc nghiệm ôn tập hóa sinh lâm sàng về cơ tim."],applications:["Ôn tập Ứng dụng sinh học phân tử – 90 câu","Bộ câu hỏi về ứng dụng SHPT trong bệnh di truyền, bệnh lý nhiễm và ung thư."],all:["Ôn tập Glucide – 70 câu trắc nghiệm","Dựa trên bài giảng Hóa học Glucide và Chuyển hóa Glucide – Th.S Nguyễn Thu Hà (PNT)."],"1":["Ôn tập Glucide – Phần Hóa học","Dựa trên bài giảng Hóa học Glucide – Th.S Nguyễn Thu Hà (PNT)."],"2":["Ôn tập Glucide – Phần Chuyển hóa","Dựa trên bài giảng Chuyển hóa Glucide – Th.S Nguyễn Thu Hà (PNT)."]};
-  $("title").textContent=titles[p][0];$("subtitle").textContent=titles[p][1];document.title=titles[p][0];
+  $("title").textContent="Ôn tập trắc nghiệm";document.title="Ôn tập trắc nghiệm";
   if(shuffle)for(let i=items.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[items[i],items[j]]=[items[j],items[i]]}
   ans={};done=false;$("res").className="res";render();
 }
