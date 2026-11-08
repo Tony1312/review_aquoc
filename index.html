@@ -40,7 +40,7 @@ label.t{display:flex;gap:6px;align-items:center;color:var(--mu);font-size:.92rem
 <h1 id="title">Ôn tập trắc nghiệm</h1>
 <div class="bar">
 <div class="ctl">
-<select id="part"><option value="all">Glucide: Cả 70 câu</option><option value="1">Glucide: Hóa học (1–35)</option><option value="2">Glucide: Chuyển hóa (36–70)</option><option value="shpt">Kỹ thuật SHPT cơ bản</option><option value="seq">Giải trình tự DNA (40 câu)</option><option value="enzyme">Enzyme (50 câu)</option><option value="hormone">Hormone (50 câu)</option><option value="vitamin">Vitamin (50 câu)</option><option value="lipid">Lipid: Hóa học &amp; Chuyển hóa (100 câu)</option><option value="translation">Dịch mã – Sinh tổng hợp protein (70 câu)</option><option value="replication">Nhân đôi &amp; sửa chữa DNA (50 câu)</option><option value="renal">Hóa sinh mô thận (70 câu)</option><option value="hepato">Hóa sinh gan, mật, tụy (70 câu)</option><option value="cardiac">Hóa sinh cơ tim (70 câu)</option><option value="applications">Ứng dụng sinh học phân tử (90 câu)</option><option value="tgP2">Chuyển hóa lipid P2 (40 câu)</option></select>
+<select id="part"><option value="all">Glucide: Cả 70 câu</option><option value="1">Glucide: Hóa học (1–35)</option><option value="2">Glucide: Chuyển hóa (36–70)</option><option value="shpt">Kỹ thuật SHPT cơ bản</option><option value="seq">Giải trình tự DNA (40 câu)</option><option value="enzyme">Enzyme (50 câu)</option><option value="hormone">Hormone (50 câu)</option><option value="vitamin">Vitamin (50 câu)</option><option value="lipid">Lipid: Hóa học &amp; Chuyển hóa (100 câu)</option><option value="translation">Dịch mã – Sinh tổng hợp protein (70 câu)</option><option value="replication">Nhân đôi &amp; sửa chữa DNA (50 câu)</option><option value="renal">Hóa sinh mô thận (70 câu)</option><option value="hepato">Hóa sinh gan, mật, tụy (70 câu)</option><option value="cardiac">Hóa sinh cơ tim (70 câu)</option><option value="protid">Hóa học &amp; Chuyển hóa Protid (120 câu)</option><option value="nucleotide">Hóa học &amp; Chuyển hóa Nucleotide (120 câu)</option><option value="hemoglobin">Hóa học &amp; Chuyển hóa Hemoglobin (120 câu)</option><option value="applications">Ứng dụng sinh học phân tử (90 câu)</option><option value="tgP2">Chuyển hóa lipid P2 (40 câu)</option></select>
 <button id="shuf">Xáo trộn</button>
 <label class="t"><input type="checkbox" id="inst"> Hiện đáp án ngay khi chọn</label>
 <button class="p" id="sub">Nộp bài</button>
@@ -51,6 +51,7 @@ label.t{display:flex;gap:6px;align-items:center;color:var(--mu);font-size:.92rem
 <div class="res" id="res"></div>
 <div id="list"></div>
 </div>
+<script src="hoa-hoc-chuyen-hoa.js"></script>
 <script>
 const D=[
 ["Công thức cấu tạo chung của carbohydrate là:",["(CH₂O)ₙ, n ≥ 2","(CH₂O)ₙ, n ≥ 3","(CHO)ₙ, n ≥ 3","(C₂H₄O)ₙ, n ≥ 3"],1,"Công thức chung (CH₂O)ₙ, n ≥ 3."],
@@ -965,9 +966,9 @@ const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 function build(shuffle){
   const p=$("part").value;
-  const source={shpt:S,seq:SEQ,enzyme:ENZ,hormone:HOR,vitamin:VIT,lipid:LIP,translation:TRN,replication:REP,renal:REN,hepato:HEP,cardiac:CAR,applications:APP,tgP2:TGP2}[p]||D;
+  const source={shpt:S,seq:SEQ,enzyme:ENZ,hormone:HOR,vitamin:VIT,lipid:LIP,translation:TRN,replication:REP,renal:REN,hepato:HEP,cardiac:CAR,protid:PROTID,nucleotide:NUCLEOTIDE,hemoglobin:HEMOGLOBIN,applications:APP,tgP2:TGP2}[p]||D;
   items=source.map((d,i)=>({d,n:i+1})).filter(x=>source!==D||p==="all"||(p==="1"?x.n<=35:x.n>35));
-  if(["renal","hepato","cardiac"].includes(p)){
+  if(["renal","hepato","cardiac","protid","nucleotide","hemoglobin"].includes(p)){
     const positions=items.map((_,i)=>i%4);
     for(let i=positions.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[positions[i],positions[j]]=[positions[j],positions[i]]}
     items=items.map(({d,n},i)=>{
