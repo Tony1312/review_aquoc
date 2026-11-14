@@ -3,6 +3,7 @@
 
   const STORAGE_KEY = 'on-tap-custom-banks-v1';
   const BUILT_IN_BANK = window.QUIZ_DATA;
+  const EXTRA_BUILT_IN_BANKS = window.QUIZ_EXTRA_BANKS;
   const elements = {
     bankSelect: document.querySelector('#bank-select'),
     bankTitle: document.querySelector('#bank-title'),
@@ -84,7 +85,7 @@
   }
 
   function makeBanks() {
-    banks = [BUILT_IN_BANK, ...customBanks];
+    banks = [BUILT_IN_BANK, ...EXTRA_BUILT_IN_BANKS, ...customBanks];
     if (!banks.some((bank) => bank.id === currentBankId)) currentBankId = BUILT_IN_BANK.id;
     elements.bankSelect.replaceChildren();
     banks.forEach((bank) => {
@@ -353,7 +354,12 @@
     });
   }
 
-  if (!BUILT_IN_BANK || !isValidBank(BUILT_IN_BANK)) {
+  if (
+    !BUILT_IN_BANK ||
+    !isValidBank(BUILT_IN_BANK) ||
+    !Array.isArray(EXTRA_BUILT_IN_BANKS) ||
+    EXTRA_BUILT_IN_BANKS.some((bank) => !isValidBank(bank))
+  ) {
     showToast('Không tải được bộ câu hỏi ban đầu.', true);
     elements.finish.disabled = true;
   } else {
