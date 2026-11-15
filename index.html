@@ -1,0 +1,140 @@
+---
+---
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f7f3">
+    <title>Britian and Fairy</title>
+    <link rel="stylesheet" href="styles.css?v={{ site.github.build_revision }}">
+    <script src="questions.js?v={{ site.github.build_revision }}" defer></script>
+    <script src="question-banks.js?v={{ site.github.build_revision }}" defer></script>
+    <script src="app.js?v={{ site.github.build_revision }}" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Ôn tập, về đầu trang">
+          <span class="brand-mark" aria-hidden="true">o.</span>
+          <span>ôn tập<span class="brand-period">.</span></span>
+        </a>
+        <div class="topbar-actions">
+          <button class="button button-quiet" id="manage-banks" type="button">
+            <span aria-hidden="true">＋</span> Bộ câu hỏi
+          </button>
+          <span class="avatar" aria-label="Góc học tập">✳</span>
+        </div>
+      </header>
+
+      <main class="main-layout">
+        <aside class="sidebar" aria-label="Điều hướng bộ câu hỏi">
+          <p class="eyebrow">GÓC HỌC TẬP</p>
+          <button class="nav-item active" type="button">
+            <span class="nav-icon" aria-hidden="true">◫</span>
+            <span>Trắc nghiệm</span>
+          </button>
+          <div class="sidebar-note">
+            <span class="note-icon" aria-hidden="true">✦</span>
+            <p>Mỗi câu đúng là một bước gần hơn tới mục tiêu của bạn.</p>
+            <span class="note-doodle" aria-hidden="true">↗</span>
+          </div>
+          <div class="sidebar-footer">
+            <span class="online-dot"></span>
+            <span>Bộ câu hỏi bạn thêm được lưu trên thiết bị này</span>
+          </div>
+        </aside>
+
+        <section class="content" aria-labelledby="page-title">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">HỌC THEO NHỊP CỦA BẠN</p>
+              <h1 id="page-title">Một chút mỗi ngày,<br><span>kiến thức ở lại lâu hơn.</span></h1>
+            </div>
+            <div class="heading-sticker" aria-hidden="true">
+              <span>✳</span>
+              <small>you<br>got this</small>
+            </div>
+          </div>
+
+          <div class="quiz-toolbar">
+            <label class="select-wrap" for="bank-select">
+              <span class="select-label">BỘ CÂU HỎI</span>
+              <select id="bank-select" aria-label="Chọn bộ câu hỏi"></select>
+            </label>
+            <label class="toggle-control" for="instant-toggle">
+              <span class="toggle-copy">
+                <strong>Hiện đáp án ngay</strong>
+                <small>Biết đúng sai sau khi chọn</small>
+              </span>
+              <input id="instant-toggle" type="checkbox" checked>
+              <span class="toggle-ui" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <section class="quiz-card" aria-label="Câu hỏi trắc nghiệm">
+            <div class="quiz-card-top">
+              <div>
+                <span class="category-tag" id="category-tag"></span>
+                <h2 class="bank-title" id="bank-title"></h2>
+              </div>
+              <div class="question-count"><span id="question-number">0</span><span class="count-divider">/</span><span id="question-total">40</span><small>đã chọn</small></div>
+            </div>
+
+            <div class="progress-track" role="progressbar" aria-label="Tiến độ làm bài" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-value" id="progress-value"></div>
+            </div>
+
+            <div class="result-summary" id="result-summary" aria-live="polite" hidden></div>
+            <div class="question-list" id="question-list"></div>
+
+            <div class="quiz-card-bottom">
+              <span class="keyboard-hint">Chọn đáp án từng câu, rồi cuộn xuống</span>
+              <button class="button button-primary" id="finish-button" type="button">Nộp bài &amp; xem điểm <span aria-hidden="true">✓</span></button>
+            </div>
+          </section>
+
+          <div class="below-card">
+            <span class="tiny-sparkle" aria-hidden="true">✳</span>
+            <span>Mẹo nhỏ: cuộn xuống để làm câu tiếp theo — không cần bấm chuyển câu.</span>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <dialog class="manage-dialog" id="manage-dialog" aria-labelledby="dialog-title">
+      <form method="dialog" class="dialog-close-row">
+        <button class="icon-button" aria-label="Đóng" value="close">×</button>
+      </form>
+      <div class="dialog-icon" aria-hidden="true">＋</div>
+      <p class="eyebrow">MANG KIẾN THỨC CỦA BẠN VÀO ĐÂY</p>
+      <h2 id="dialog-title">Thêm bộ câu hỏi mới</h2>
+      <p class="dialog-description">Tải lên tệp JSON theo mẫu bên dưới. Bộ câu hỏi sẽ được lưu trong trình duyệt trên thiết bị này.</p>
+      <div class="format-box">
+        <div class="format-heading"><span>ĐỊNH DẠNG TỆP JSON</span><button class="text-button" id="download-template" type="button">Tải tệp mẫu ↓</button></div>
+        <pre>{
+  "title": "Tên bộ câu hỏi",
+  "questions": [
+    {
+      "question": "Nội dung câu hỏi?",
+      "options": {
+        "A": "Lựa chọn A",
+        "B": "Lựa chọn B",
+        "C": "Lựa chọn C",
+        "D": "Lựa chọn D"
+      },
+      "answer": "B",
+      "explanation": "Giải thích (không bắt buộc)"
+    }
+  ]
+}</pre>
+      </div>
+      <label class="button button-primary upload-button" for="file-input">Chọn tệp JSON <span aria-hidden="true">↑</span></label>
+      <input id="file-input" type="file" accept=".json,application/json" hidden>
+      <p class="dialog-footnote">Mỗi câu cần có câu hỏi, các lựa chọn và đáp án đúng (A, B, C...).</p>
+      <div class="bank-list" id="bank-list"></div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

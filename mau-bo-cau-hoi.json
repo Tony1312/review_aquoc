@@ -1,0 +1,16 @@
+{
+  "title": "Bộ câu hỏi mẫu",
+  "questions": [
+    {
+      "question": "Thủ đô của Việt Nam là gì?",
+      "options": {
+        "A": "Đà Nẵng",
+        "B": "Hà Nội",
+        "C": "Huế",
+        "D": "Cần Thơ"
+      },
+      "answer": "B",
+      "explanation": "Hà Nội là thủ đô của Việt Nam."
+    }
+  ]
+}
